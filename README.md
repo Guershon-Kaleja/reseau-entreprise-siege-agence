@@ -259,23 +259,6 @@ Les serveurs ont reçu leur adresse IPv6 par SLAAC. L'identifiant d'interface es
 - Utiliser WPA2-Enterprise (802.1X) pour le Wi-Fi
 - Remplacer la répartition fixe 70/30 du DHCP par un basculement DHCP
 
-## Fichiers du dépôt
-
-```
-.
-├── README.md
-├── plan-adressage.md
-├── topologie.pkt
-├── images/
-│   └── topologie.png
-└── configs/
-    ├── RsiegeAdmin.txt
-    ├── SsiegeServeurs.txt
-    ├── SlanHotes.txt
-    ├── Ragence.txt
-    └── SlanFilaire.txt
-```
-
 ## Outils
 
 Cisco Packet Tracer
