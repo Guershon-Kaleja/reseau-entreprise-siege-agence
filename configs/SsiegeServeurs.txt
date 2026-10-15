@@ -1,0 +1,54 @@
+! ============================================================
+! SsiegeServeurs : switch du LAN Serveurs (Catalyst 2960)
+! Export de show running-config (condensé : ports 8 à 24 regroupés).
+! Secrets remplacés par <REDACTED>.
+! ============================================================
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname SsiegeServeurs
+!
+enable secret 5 <REDACTED>
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name test.com
+!
+username shon secret 5 <REDACTED>
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+! Fa0/1 à Fa0/6 : serveurs (DHCP 1-2, DNS 1-2, HTTP 1-2)
+! Fa0/7 : liaison vers RsiegeAdmin (Gi0/0)
+interface range FastEthernet0/1 - 7
+!
+interface range FastEthernet0/8 - 24
+ description port non utiliser
+ shutdown
+!
+interface range GigabitEthernet0/1 - 2
+ description port non utiliser
+ shutdown
+!
+interface Vlan1
+ ip address 172.16.1.2 255.255.255.240
+!
+ip default-gateway 172.16.1.1
+!
+banner motd ^C authorized access only ^C
+!
+line con 0
+ password 7 <REDACTED>
+ login
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+end
